@@ -26,12 +26,14 @@ Typecho 版本 1.2 (18.1.29)
 
       ````nginx
       server{
-          #禁访IP
-      	include /web/usr/plugins/DenyIP/denyip.conf;
-      	#禁止直接访问.conf后缀的文件
-      	location ~* \.(conf)$ {  
-               return 404;
-          }
+         #网站相关配置
+         #在server块里面添加以下配置
+         #禁访IP
+         include /web/usr/plugins/DenyIP/denyip.conf;
+         #禁止直接访问.conf后缀的文件
+         location ~* \.(conf)$ {  
+            return 404;
+         }
       }
       ````
 
