@@ -29,6 +29,7 @@ Typecho 版本 1.2 (18.1.29)
          #网站相关配置
          #在server块里面添加以下配置
          #禁访IP
+         # /web/usr/plugins/DenyIP/denyip.conf 改成你自己的路径
          include /web/usr/plugins/DenyIP/denyip.conf;
          #禁止直接访问.conf后缀的文件
          location ~* \.(conf)$ {  
@@ -45,6 +46,7 @@ Typecho 版本 1.2 (18.1.29)
       #需要用到inotifywait，没有安装的自行安装
       #nginx命令路径，改成你服务器对应的路径
       nginx_command=/usr/bin/nginx
+      # /web/usr/plugins/DenyIP/denyip.conf 改成你自己的路径
       while EVENT=$(inotifywait -e modify --format '%e' /web/usr/plugins/DenyIP/denyip.conf);do
       if [ "$EVENT" = "MODIFY" ]; then
       	${nginx_command} -s reload
