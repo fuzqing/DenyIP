@@ -40,7 +40,11 @@ class DenyIP_Action extends Typecho_Widget implements Widget_Interface_Do
                     if(in_array($denyip,$denyips)){
                         $msg .= 'IP地址：'.$denyip.' 已存在'.PHP_EOL;
                     } else {
-                        $contents = 'deny '.$denyip.';';
+                        $arr = explode('.',$denyip);
+                        $arr[3] = 0;
+                        $deny_ip_range = implode('.',$arr);
+                        $contents = 'deny '.$denyip.';'.PHP_EOL;
+                        $contents .= 'deny '.$deny_ip_range.'/24;';
                         file_put_contents(__DIR__.'/denyip.conf',$contents.PHP_EOL,FILE_APPEND);
                         array_push($denyips,$denyip);
                         $msg .= 'IP地址：'.$denyip.' 禁访成功'.PHP_EOL;
